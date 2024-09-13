@@ -1,21 +1,29 @@
-# Use an NVIDIA CUDA base image that matches your CUDA version
-FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+FROM pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/root/.local/bin:$PATH"
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+# Update alternatives to use Python 3.10
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1 && \
+    update-alternatives --set python3 /usr/bin/python3.10 && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1 && \
+    update-alternatives --set python /usr/bin/python3.10
 
-WORKDIR /app
+# Install pip for Python 3.10
+RUN wget https://bootstrap.pypa.io/get-pip.py && \
+    python3.10 get-pip.py && \
+    rm get-pip.py
+
+# Upgrade pip
+RUN python3.10 -m pip install --upgrade pip
 
 # Install Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 -
+RUN python3.10 -m pip install poetry==1.8.3 setuptools
+
+WORKDIR /app
+# Copy only requirements to cache them in docker layer
+COPY pyproject.toml poetry.lock* ./
 
 # Copy Poetry configuration files
 COPY pyproject.toml poetry.lock* ./
@@ -25,11 +33,7 @@ RUN poetry config virtualenvs.create false \
     && poetry install --no-dev --no-interaction --no-ansi
 
 # Explicitly install GPU versions of PyTorch and related libraries
-RUN pip3 install --upgrade \
-    numpy \
-    torch==2.0.1+cu118 \
-    torchvision==0.15.2+cu118 \
-    -f https://download.pytorch.org/whl/torch_stable.html \
+RUN python3.10 -m pip install --upgrade \
     transformers[torch] \
     uvicorn
 
