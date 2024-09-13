@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "multi2vec-clip-inference-basket"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+transformers = "^4.44.2"
+clip = "^0.2.0"
+numpy = "^2.1.1"
+pydantic = "^2.9.1"
+pillow = "^10.4.0"
+asyncio = "^3.4.3"
+fastapi = "^0.114.1"
+nltk = "^3.9.1"
+torch = "2.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
