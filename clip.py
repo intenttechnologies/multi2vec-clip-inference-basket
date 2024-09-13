@@ -144,7 +144,9 @@ class ClipInferenceOpenAI:
                 text=texts, images=image, return_tensors="pt", padding=True
             ).to(self.device)
 
-            outputs = self.model(**inputs)
+            # self.clip_model.
+
+            outputs = self.clip_model(**inputs)
             logits_per_image = outputs.logits_per_image
             probs = logits_per_image.softmax(dim=1)
 
@@ -180,19 +182,6 @@ class Clip:
 
         return await asyncio.wrap_future(self.executor.submit(self.clip.vectorize, payload))
 
-    async def vectorize(self, payload: ClipSimilarityInput):
-        """
-        Similarity Search
-
-        Parameters
-        ----------
-        payload : ClipSimilarityInput
-            Input to the Clip model.
-
-        Returns
-        -------
-        ClipSimilarityResult
-            The result of the model for both images and text.
-        """
-
+    async def similarity(self, payload: ClipSimilarityInput):
         return await asyncio.wrap_future(self.executor.submit(self.clip.similarity, payload))
+
