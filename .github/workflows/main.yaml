@@ -1,15 +1,99 @@
-name: Main
-
+name: Bump version and push tag
+env:
+  AWS_REGION: eu-west-2
+  ECR_REPOSITORY: product-ingestion
+  DOCKER_BUILDKIT: 1
 on:
   push:
     branches:
       - main
     paths-ignore:
-      - README.md
-      - LICENSE
-  pull_request:
+      - "CHANGELOG.md"
 
 jobs:
-  build:
-    uses: ./.github/workflows/workflow-build.yaml
-    secrets: inherit
+  build-image:
+    name: Build image
+    runs-on: ubuntu-latest-4-cores
+    env:
+      CLIP_MODEL_NAME: openai/clip-vit-base-patch32
+    steps:
+      - uses: actions/checkout@v3
+        id: checkout
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install conventional-changelog-conventionalcommits
+      - name: Bump version and push tag
+        id: bump
+        uses: TriPSs/conventional-changelog-action@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          git-user-name: Basket GitHub Bot
+          git-user-email: githubbot@basket.com
+          git-message: "chore(release): {version}"
+          output-file: "CHANGELOG.md"
+          release-count: 10
+          fallback-version: "1.0.0"
+          skip-on-empty: false
+          config-file-path: ".github/changelog-config-file.cjs"
+          create-summary: true
+      - name: Create Release
+        uses: actions/create-release@v1
+        if: ${{ steps.bump.outputs.skipped == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+        with:
+          tag_name: ${{ steps.bump.outputs.tag }}
+          release_name: ${{ steps.bump.outputs.tag }}
+          body: ${{ steps.bump.outputs.clean_changelog }}
+
+  build-custom-image:
+    name: Build custom image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Github variables
+        run: |
+          echo tag: ${{ needs.bump_version_and_tag.outputs.tag }}
+
+      - name: Clone
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Create repository if does not exist
+        # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ecr/create-repository.html
+        run: |
+          aws ecr describe-repositories --repository-names ${{ env.ECR_REPOSITORY }} || \
+          aws ecr create-repository \
+            --repository-name ${{ env.ECR_REPOSITORY }} \
+            --query 'repository.repositoryUri' \
+            --output text \
+            2>/dev/null
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+        run: |
+          docker image build \
+            --build-arg NODE_ENV=production \
+            --build-arg VERSION=${{ needs.bump_version_and_tag.outputs.tag }} \
+            --tag ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ needs.bump_version_and_tag.outputs.tag }} \
+            --tag ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest \
+            .
+          docker push --all-tags ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}
+
