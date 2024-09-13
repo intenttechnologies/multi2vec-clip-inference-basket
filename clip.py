@@ -57,8 +57,8 @@ class ClipInferenceOpenAI:
 		self.device = 'cpu'
 		if cuda:
 			self.device=cuda_core
-		self.clip_model = CLIPModel.from_pretrained('./models/openai_clip').to(self.device)
-		self.processor = CLIPProcessor.from_pretrained('./models/openai_clip_processor')
+		self.clip_model = CLIPModel.from_pretrained('/app/models/openai_clip').to(self.device)
+		self.processor = CLIPProcessor.from_pretrained('/app/models/openai_clip_processor')
 
 	def vectorize(self, payload: ClipInput) -> ClipResult:
 		"""
@@ -154,7 +154,7 @@ class Clip:
 	def __init__(self, cuda, cuda_core):
 		self.executor = ThreadPoolExecutor()
 
-		if path.exists('./models/openai_clip'):
+		if path.exists('/app/models/openai_clip'):
 			raise Exception("No model for openai_clip can be found")
 		
 		self.clip = ClipInferenceOpenAI(cuda, cuda_core)

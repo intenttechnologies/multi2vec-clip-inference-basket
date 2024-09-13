@@ -15,8 +15,8 @@ logging.info(f"Downloading OpenAI CLIP model {clip_model_name} from huggingface 
 model_path = snapshot_download(repo_id=clip_model_name)
 
 # Define the paths where we want to save our files
-save_path = './models/openai_clip'
-processor_path = './models/openai_clip_processor'
+save_path = '/app/models/openai_clip'
+processor_path = '/app/models/openai_clip_processor'
 
 # Ensure the directories exist
 os.makedirs(save_path, exist_ok=True)
