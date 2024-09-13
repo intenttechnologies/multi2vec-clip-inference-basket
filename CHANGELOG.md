@@ -1,3 +1,10 @@
+## [1.16.12](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.11...v1.16.12) (2024-09-13)
+
+
+### Bug Fixes
+
+* try transformers torch too ([d0bcd75](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/d0bcd758989b52b5e374670c924f19d7bc4e46fc))
+
 ## [1.16.11](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.10...v1.16.11) (2024-09-13)
 
 
@@ -60,11 +67,4 @@
 ### Bug Fixes
 
 * updated dependencies ([188c080](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/188c080bba3eb03c28c529a003c50e754e0c7c9c))
-
-## [1.16.2](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.1...v1.16.2) (2024-09-13)
-
-
-### Bug Fixes
-
-* empty commit ([84eba57](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/84eba5718d5cb487f87cbd3ad93c187023eb2bc3))
 
