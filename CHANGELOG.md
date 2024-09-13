@@ -1,3 +1,10 @@
+## [1.16.21](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.20...v1.16.21) (2024-09-13)
+
+
+### Bug Fixes
+
+* try absolute ([b63c378](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/b63c378f2c2b0b3b039175095ea922be5f02b299))
+
 ## [1.16.20](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.19...v1.16.20) (2024-09-13)
 
 
@@ -60,11 +67,4 @@
 ### Bug Fixes
 
 * try transformers torch too ([d0bcd75](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/d0bcd758989b52b5e374670c924f19d7bc4e46fc))
-
-## [1.16.11](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.10...v1.16.11) (2024-09-13)
-
-
-### Bug Fixes
-
-* changed dockerfile ([727b611](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/727b611a0b152106c56924d99c683aa0e442261b))
 
