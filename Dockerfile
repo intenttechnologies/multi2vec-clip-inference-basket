@@ -20,6 +20,9 @@ COPY pyproject.toml poetry.lock* ./
 RUN poetry config virtualenvs.create false \
     && poetry install --no-dev --no-interaction --no-ansi
 
+# Explicitly install uvicorn
+RUN pip install uvicorn
+
 # Copy and run the download script
 COPY download.py .
 RUN ./download.py
