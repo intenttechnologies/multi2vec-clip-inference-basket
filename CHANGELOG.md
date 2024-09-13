@@ -1,3 +1,10 @@
+## [1.16.11](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.10...v1.16.11) (2024-09-13)
+
+
+### Bug Fixes
+
+* changed dockerfile ([727b611](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/727b611a0b152106c56924d99c683aa0e442261b))
+
 ## [1.16.10](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.9...v1.16.10) (2024-09-13)
 
 
@@ -60,11 +67,4 @@
 ### Bug Fixes
 
 * empty commit ([84eba57](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/84eba5718d5cb487f87cbd3ad93c187023eb2bc3))
-
-## [1.16.1](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.0...v1.16.1) (2024-09-13)
-
-
-### Bug Fixes
-
-* ECR repository name ([b4f8c50](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/b4f8c5097f63eed0679f43d0c9a8f35e06862c0d))
 
