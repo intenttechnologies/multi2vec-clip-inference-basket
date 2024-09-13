@@ -8,6 +8,7 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from threading import Lock
 from typing import List
+import os
 
 # _parse_image decodes the base64 and parses the image bytes into a
 	# PIL.Image. If the image is not in RGB mode, e.g. for PNGs using a palette,
@@ -154,8 +155,21 @@ class Clip:
 	def __init__(self, cuda, cuda_core):
 		self.executor = ThreadPoolExecutor()
 
-		if path.exists('/app/models/openai_clip'):
-			raise Exception("No model for openai_clip can be found")
+		model_path = '/app/models/openai_clip'
+		directory = '/app/models'
+		if not path.exists(model_path):
+			print(f"No model for openai_clip can be found at {model_path}")
+			print("Contents of the /app/models directory:")
+			try:
+				for item in os.listdir('directory'):
+					item_path = os.path.join(directory, item)
+					if os.path.isfile(item_path):
+						print(f"  File: {item}")
+					elif os.path.isdir(item_path):
+						print(f"  Directory: {item}")
+			except Exception as e:
+				print(f"Error reading directory {directory}: {str(e)}")
+			raise Exception(f"No model for openai_clip can be found at {model_path}")
 		
 		self.clip = ClipInferenceOpenAI(cuda, cuda_core)
 
