@@ -1,3 +1,10 @@
+## [1.16.16](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.15...v1.16.16) (2024-09-13)
+
+
+### Bug Fixes
+
+* going full cuda ([70fa922](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/70fa922bef04c305f564f627c389c768b009e1df))
+
 ## [1.16.15](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.14...v1.16.15) (2024-09-13)
 
 
@@ -60,11 +67,4 @@
 ### Bug Fixes
 
 * updated to download without gpu ([771da7d](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/771da7d229cf1e3c95936ed6f8266b82e4858487))
-
-## [1.16.6](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.5...v1.16.6) (2024-09-13)
-
-
-### Bug Fixes
-
-* updated packagee ([1732eda](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/1732edab7e2e610d13e07a44c1fee756bf710281))
 
