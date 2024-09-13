@@ -1,3 +1,10 @@
+## [1.16.8](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.7...v1.16.8) (2024-09-13)
+
+
+### Bug Fixes
+
+* updated to download without gpu ([3528ed7](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/3528ed78e3f1d39f06954eeccd49be00006a5630))
+
 ## [1.16.7](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.6...v1.16.7) (2024-09-13)
 
 
