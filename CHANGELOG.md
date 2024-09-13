@@ -1,3 +1,10 @@
+## [1.16.2](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.1...v1.16.2) (2024-09-13)
+
+
+### Bug Fixes
+
+* empty commit ([84eba57](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/84eba5718d5cb487f87cbd3ad93c187023eb2bc3))
+
 ## [1.16.1](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.0...v1.16.1) (2024-09-13)
 
 
