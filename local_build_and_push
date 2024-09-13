@@ -1,0 +1,9 @@
+docker build \
+  --build-arg "TEXT_MODEL_NAME=sentence-transformers/clip-ViT-B-32-multilingual-v1" \
+  --build-arg "CLIP_MODEL_NAME=clip-ViT-B-32" \
+  --file basket.Dockerfile \
+  -t multi2vec-clip-inference-basket --platform linux/amd64 .
+aws sso login --profile basket-dev
+aws ecr get-login-password --region eu-west-2 --profile basket-dev | docker login --username AWS --password-stdin 207481382654.dkr.ecr.eu-west-2.amazonaws.com
+docker tag multi2vec-clip-inference-basket:latest 207481382654.dkr.ecr.eu-west-2.amazonaws.com/multi2vec-clip-inference-basket:v1.17.0
+docker push 207481382654.dkr.ecr.eu-west-2.amazonaws.com/multi2vec-clip-inference-basket:v1.17.0

@@ -2,7 +2,7 @@ import os
 from logging import getLogger
 from fastapi import FastAPI, Response, status
 from contextlib import asynccontextmanager
-from clip import Clip, ClipInput
+from clip import Clip, ClipInput, ClipSimilarityInput
 from meta import Meta
 
 
@@ -58,7 +58,22 @@ async def read_item(payload: ClipInput, response: Response):
 		}
 	except Exception as e:
 		logger.exception(
-            'Something went wrong while vectorizing data.'
-        )
+			'Something went wrong while vectorizing data.'
+		)
+		response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+		return {"error": str(e)}
+	
+
+@app.post("/similarity")
+async def similarity(payload: ClipSimilarityInput, response: Response):
+	try:
+		result = await clip.vectorize(payload)
+		return {
+			"scores": result.scores,
+		}
+	except Exception as e:
+		logger.exception(
+			'Something went wrong while vectorizing data.'
+		)
 		response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
 		return {"error": str(e)}

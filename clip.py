@@ -13,6 +13,7 @@ import json
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from threading import Lock
+from typing import List
 
 
 class ClipInput(BaseModel):
@@ -28,6 +29,15 @@ class ClipResult:
 		self.text_vectors = text_vectors
 		self.image_vectors = image_vectors
 
+class ClipSimilarityInput(BaseModel):
+    image: str
+    texts: List[str]
+    
+class ClipSimilarityResult:
+    scores: List[float]
+
+    def __init__(self, scores: List[float]):
+        self.scores = scores
 
 class ClipInferenceABS(ABC):
 	"""
@@ -97,6 +107,27 @@ class ClipInferenceSentenceTransformers(ClipInferenceABS):
 			text_vectors=text_vectors,
 			image_vectors=image_vectors,
 		)
+  
+	def similarity(self, payload: ClipSimilarityInput) -> ClipSimilarityResult:
+		try:
+			self.lock.acquire()
+			image = _parse_image(payload.image)
+
+			image = Image.open(str(image))
+			texts = payload.texts
+			# text = [t.strip() for t in text.split("|")]
+			inputs = self.processor(
+				text=texts, images=image, return_tensors="pt", padding=True
+			).to(self.device)
+
+			outputs = self.model(**inputs)
+			logits_per_image = outputs.logits_per_image
+			probs = logits_per_image.softmax(dim=1)
+
+			result = ClipSimilarityResult(scores=probs.tolist()[0])
+			return result
+		finally:
+			self.lock.release()
 
 
 class ClipInferenceOpenAI:
@@ -300,4 +331,3 @@ def _parse_image(base64_encoded_image_string):
 	if img.mode != 'RGB':
 		img = img.convert('RGB')
 	return img
-
