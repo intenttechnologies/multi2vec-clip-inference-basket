@@ -1,3 +1,10 @@
+## [1.16.5](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.4...v1.16.5) (2024-09-13)
+
+
+### Bug Fixes
+
+* set package mode to false ([a556bd8](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/a556bd86ec29dd5e3d52d86e417a59eb916d60be))
+
 ## [1.16.4](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.3...v1.16.4) (2024-09-13)
 
 
