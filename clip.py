@@ -1,15 +1,9 @@
 import io
 import base64
 from os import path
-from abc import ABC, abstractmethod
-from typing import Union
 from PIL import Image
 from pydantic import BaseModel
 from transformers import CLIPProcessor, CLIPModel
-from sentence_transformers import SentenceTransformer
-import open_clip
-import torch
-import json
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from threading import Lock

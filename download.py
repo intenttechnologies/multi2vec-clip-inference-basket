@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 
-import os
-import sys
 import logging
 from transformers import CLIPProcessor, CLIPModel
-import json
 
 logging.basicConfig(level=logging.INFO)
 

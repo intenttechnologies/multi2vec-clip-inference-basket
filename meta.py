@@ -1,7 +1,5 @@
 import json
-from os import path
 from transformers import CLIPConfig
-from transformers import AutoConfig
 
 class Meta:
 
