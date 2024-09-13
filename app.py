@@ -47,24 +47,6 @@ async def live_and_ready(response: Response):
 async def meta():
 	return await meta_config.get()
 
-
-@app.post("/vectorize")
-async def read_item(payload: ClipInput, response: Response):
-	try:
-		result = await clip.vectorize(payload)
-		
-		return {
-			"textVectors": result.text_vectors,
-			"imageVectors": result.image_vectors
-		}
-	except Exception as e:
-		logger.exception(
-            'Something went wrong while vectorizing data.'
-        )
-		response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-		return {"error": str(e)}
-	
-
 @app.post("/vectorize")
 async def read_item(payload: ClipInput, response: Response):
 	try:
@@ -82,7 +64,7 @@ async def read_item(payload: ClipInput, response: Response):
 	
 
 @app.post("/similarity")
-async def read_item(payload: ClipSimilarityInput, response: Response):
+async def similarity(payload: ClipSimilarityInput, response: Response):
 	try:
 		result = await clip.vectorize(payload)
 		return {
