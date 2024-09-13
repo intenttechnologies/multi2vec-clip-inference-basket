@@ -1,3 +1,10 @@
+## [1.16.23](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.22...v1.16.23) (2024-09-13)
+
+
+### Bug Fixes
+
+* fixed naming of model ([609d1a3](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/609d1a3052feb45283d238e96cd1473e0c09f8ba))
+
 ## [1.16.22](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.21...v1.16.22) (2024-09-13)
 
 
@@ -60,11 +67,4 @@
 ### Bug Fixes
 
 * going full cuda ([74871e7](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/74871e755eee57959b5ed2001d4a68d8fc7d9947))
-
-## [1.16.13](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.12...v1.16.13) (2024-09-13)
-
-
-### Bug Fixes
-
-* try transformers torch too ([70b7aa7](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/70b7aa7e2ae77665afe6297f4ef01b9f1a017fd5))
 
