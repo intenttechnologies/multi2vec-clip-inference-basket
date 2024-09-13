@@ -1,4 +1,11 @@
-## 1.16.0 (2024-09-13)
+## [1.16.1](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.0...v1.16.1) (2024-09-13)
+
+
+### Bug Fixes
+
+* ECR repository name ([b4f8c50](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/b4f8c5097f63eed0679f43d0c9a8f35e06862c0d))
+
+## [1.16.0](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/6e2fc1a336c2a876434e6984734276d759b3a9ca...v1.16.0) (2024-09-13)
 
 
 ### Features
