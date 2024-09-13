@@ -55,7 +55,14 @@ RUN poetry config virtualenvs.create false \
 # Explicitly install GPU versions of PyTorch and related libraries
 RUN python3.10 -m pip install --upgrade \
     transformers[torch] \
-    uvicorn
+    uvicorn \
+    huggingface_hub \
+    openai-clip \
+    pillow \
+    fastapi \
+    asyncio \
+    numpy \
+    pydantic
 
 # Copy and run the download script
 COPY download.py .
