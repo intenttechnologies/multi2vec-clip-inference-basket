@@ -1,3 +1,10 @@
+## [1.16.20](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.19...v1.16.20) (2024-09-13)
+
+
+### Bug Fixes
+
+* try a different download.py ([b5f9f7a](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/b5f9f7a6e35bc85d05e1b855e1be926c66e35180))
+
 ## [1.16.19](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.18...v1.16.19) (2024-09-13)
 
 
@@ -60,11 +67,4 @@
 ### Bug Fixes
 
 * changed dockerfile ([727b611](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/727b611a0b152106c56924d99c683aa0e442261b))
-
-## [1.16.10](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.9...v1.16.10) (2024-09-13)
-
-
-### Bug Fixes
-
-* added missing uvicorn ([e7cbe2f](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/e7cbe2f4f99d3680b4dae043bcd7932fff9e56cf))
 
