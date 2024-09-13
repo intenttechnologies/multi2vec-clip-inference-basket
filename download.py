@@ -1,35 +1,18 @@
 #!/usr/bin/env python3
 
 import logging
-from huggingface_hub import snapshot_download
-import os
-import json
+from transformers import CLIPProcessor, CLIPModel
 
 logging.basicConfig(level=logging.INFO)
 
 clip_model_name = "openai/clip-vit-base-patch32"
 
-logging.info(f"Downloading OpenAI CLIP model {clip_model_name} from huggingface model hub")
+logging.info(
+  "Downloading OpenAI CLIP model {} from huggingface model hub".format(clip_model_name)
+)
 
-# Download the model files
-model_path = snapshot_download(repo_id=clip_model_name)
+clip_model = CLIPModel.from_pretrained(clip_model_name)
+clip_model.save_pretrained('./models/openai_clip')
+processor = CLIPProcessor.from_pretrained(clip_model_name)
+processor.save_pretrained('./models/openai_clip_processor')
 
-# Define the paths where we want to save our files
-save_path = '/app/models/openai_clip'
-processor_path = '/app/models/openai_clip_processor'
-
-# Ensure the directories exist
-os.makedirs(save_path, exist_ok=True)
-os.makedirs(processor_path, exist_ok=True)
-
-# Copy the necessary files
-import shutil
-
-# For the model
-shutil.copy(os.path.join(model_path, 'config.json'), save_path)
-shutil.copy(os.path.join(model_path, 'pytorch_model.bin'), save_path)
-
-# For the processor
-shutil.copy(os.path.join(model_path, 'preprocessor_config.json'), processor_path)
-
-logging.info("Model and processor files saved successfully")
