@@ -30,7 +30,7 @@ RUN pip3 install --upgrade \
     torch==2.0.1+cu118 \
     torchvision==0.15.2+cu118 \
     -f https://download.pytorch.org/whl/torch_stable.html \
-    transformers \
+    transformers[torch] \
     uvicorn
 
 # Copy and run the download script
