@@ -11,7 +11,7 @@ on:
       - "CHANGELOG.md"
 
 jobs:
-  build-image:
+  bump_version_and_tag:
     name: Build image
     runs-on: ubuntu-latest-4-cores
     env:
@@ -21,7 +21,7 @@ jobs:
         id: checkout
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
@@ -51,9 +51,11 @@ jobs:
           release_name: ${{ steps.bump.outputs.tag }}
           body: ${{ steps.bump.outputs.clean_changelog }}
 
-  build-custom-image:
-    name: Build custom image
+  push_tag_to_ecr:
+    name: Build image and push
+    needs: bump_version_and_tag
     runs-on: ubuntu-latest
+    wait
     steps:
       - uses: actions/checkout@v3
       - name: Github variables
