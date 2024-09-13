@@ -52,6 +52,7 @@ async def meta():
 async def read_item(payload: ClipInput, response: Response):
 	try:
 		result = await clip.vectorize(payload)
+		
 		return {
 			"textVectors": result.text_vectors,
 			"imageVectors": result.image_vectors
