@@ -12,8 +12,9 @@ on:
 
 jobs:
   bump_version_and_tag:
-    name: Build image
-    runs-on: ubuntu-latest-4-cores
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.bump.outputs.tag }}
     env:
       CLIP_MODEL_NAME: openai/clip-vit-base-patch32
     steps:
