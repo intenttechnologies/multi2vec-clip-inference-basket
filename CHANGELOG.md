@@ -1,3 +1,10 @@
+## [1.16.19](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.18...v1.16.19) (2024-09-13)
+
+
+### Bug Fixes
+
+* bad if statement ([19590c0](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/19590c062e6fd5b70640a8dfad9fe20666720121))
+
 ## [1.16.18](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.17...v1.16.18) (2024-09-13)
 
 
@@ -60,11 +67,4 @@
 ### Bug Fixes
 
 * added missing uvicorn ([e7cbe2f](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/e7cbe2f4f99d3680b4dae043bcd7932fff9e56cf))
-
-## [1.16.9](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.8...v1.16.9) (2024-09-13)
-
-
-### Bug Fixes
-
-* added missing uvicorn ([c3ef44f](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/c3ef44f2684fc4e55d3bfcc765455e26bd21faff))
 
