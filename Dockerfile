@@ -21,7 +21,7 @@ RUN poetry config virtualenvs.create false \
     && poetry install --no-dev --no-interaction --no-ansi
 
 # Explicitly install uvicorn
-RUN pip install uvicorn
+RUN pip install --upgrade numpy torch torchvision open_clip_torch uvicorn
 
 # Copy and run the download script
 COPY download.py .
