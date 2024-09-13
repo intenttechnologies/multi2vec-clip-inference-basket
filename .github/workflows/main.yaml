@@ -1,7 +1,7 @@
 name: Bump version and push tag
 env:
   AWS_REGION: eu-west-2
-  ECR_REPOSITORY: product-ingestion
+  ECR_REPOSITORY: multi2vec-clip-inference-basket
   DOCKER_BUILDKIT: 1
 on:
   push:
