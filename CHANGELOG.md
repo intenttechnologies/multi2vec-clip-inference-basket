@@ -1,3 +1,10 @@
+## [1.16.18](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.17...v1.16.18) (2024-09-13)
+
+
+### Bug Fixes
+
+* updated the path for the models ([0017fd4](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/0017fd41f8f1074b245582bb9157f152a1053671))
+
 ## [1.16.17](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.16...v1.16.17) (2024-09-13)
 
 
@@ -60,11 +67,4 @@
 ### Bug Fixes
 
 * added missing uvicorn ([c3ef44f](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/c3ef44f2684fc4e55d3bfcc765455e26bd21faff))
-
-## [1.16.8](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.7...v1.16.8) (2024-09-13)
-
-
-### Bug Fixes
-
-* updated to download without gpu ([3528ed7](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/3528ed78e3f1d39f06954eeccd49be00006a5630))
 
