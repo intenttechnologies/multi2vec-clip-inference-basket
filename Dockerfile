@@ -66,7 +66,7 @@ RUN python3.10 -m pip install --upgrade \
 
 # Copy and run the download script
 COPY download.py .
-RUN python3 download.py
+RUN python3.10 download.py
 
 # Copy the rest of the application
 COPY . .
