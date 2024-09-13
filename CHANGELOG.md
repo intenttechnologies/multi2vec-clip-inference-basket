@@ -1,3 +1,10 @@
+## [1.16.4](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.3...v1.16.4) (2024-09-13)
+
+
+### Bug Fixes
+
+* added missing files ([37631de](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/37631de473cb7dd234c0083e3a38944e781c5d9f))
+
 ## [1.16.3](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.2...v1.16.3) (2024-09-13)
 
 
