@@ -1,3 +1,10 @@
+## [1.16.22](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.21...v1.16.22) (2024-09-13)
+
+
+### Bug Fixes
+
+* fix the mistake for vectorizing ([6cbbfd6](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/6cbbfd6cfc1802fe3e9e4eded1354f908e46d041))
+
 ## [1.16.21](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.20...v1.16.21) (2024-09-13)
 
 
@@ -60,11 +67,4 @@
 ### Bug Fixes
 
 * try transformers torch too ([70b7aa7](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/70b7aa7e2ae77665afe6297f4ef01b9f1a017fd5))
-
-## [1.16.12](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/compare/v1.16.11...v1.16.12) (2024-09-13)
-
-
-### Bug Fixes
-
-* try transformers torch too ([d0bcd75](https://github.com/intenttechnologies/multi2vec-clip-inference-basket/commit/d0bcd758989b52b5e374670c924f19d7bc4e46fc))
 
