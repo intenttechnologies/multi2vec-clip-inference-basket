@@ -1,18 +1,26 @@
 #!/usr/bin/env python3
 
 import logging
-from transformers import CLIPProcessor, CLIPModel
+from transformers import CLIPProcessor, CLIPConfig
+from huggingface_hub import snapshot_download
 
 logging.basicConfig(level=logging.INFO)
 
 clip_model_name = "openai/clip-vit-base-patch32"
 
 logging.info(
-  "Downloading OpenAI CLIP model {} from huggingface model hub".format(clip_model_name)
+    f"Downloading OpenAI CLIP model {clip_model_name} from huggingface model hub"
 )
 
-clip_model = CLIPModel.from_pretrained(clip_model_name)
-clip_model.save_pretrained('./models/openai_clip')
-processor = CLIPProcessor.from_pretrained(clip_model_name)
+# Download the model files without instantiating the model
+model_path = snapshot_download(clip_model_name)
+
+# Save the configuration
+config = CLIPConfig.from_pretrained(model_path)
+config.save_pretrained('./models/openai_clip')
+
+# Save the processor
+processor = CLIPProcessor.from_pretrained(model_path)
 processor.save_pretrained('./models/openai_clip_processor')
 
+logging.info("Model and processor saved successfully")
