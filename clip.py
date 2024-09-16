@@ -14,6 +14,8 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from threading import Lock
 from typing import List
+from torch import nn
+import numpy
 
 
 class ClipInput(BaseModel):
@@ -118,22 +120,33 @@ class ClipInferenceSentenceTransformers(ClipInferenceABS):
 			text = payload.texts
 
 			# Convert the image to an embedding
-			image_embedding = self.img_model.encode(image, convert_to_tensor=True)
+			image_features = self.img_model.encode(image, convert_to_tensor=True)
+			image_features = image_features / image_features.norm(dim=-1, keepdim=True)
 
 			# Convert the text to an embedding
-			text_embedding = self.text_model.encode(text, convert_to_tensor=True)
-
+			text_features = self.img_model.encode(text, convert_to_tensor=True)
+			text_features = text_features / text_features.norm(dim=-1, keepdim=True)
 			# Compute cosine similarity
-			similarity = util.cos_sim(image_embedding, text_embedding)
-
-			# Without softmax the results are way too close together
-			# scores = similarity[0]		
+			# similarity = util.cos_sim(image_features, text_features)
    
-			# Apply softmax to amplify differences
-			scores = torch.nn.functional.softmax(similarity[0] / 0.1, dim=0)
+			# # Apply softmax to amplify differences
+			# scores = torch.nn.functional.softmax(similarity[0] / 0.0045, dim=0)
+   
+   			# Calculate cosine similarity with logit scale
+			logit_scale = nn.Parameter(torch.ones([]) * numpy.log(1 / 0.07))
+			logit_scale = logit_scale.exp()
+   
+			logits_per_image = logit_scale * image_features @ text_features.t()
+   
+			# Detach the tensor and convert to numpy array
+			# scores = logits_per_image.softmax(dim=-1).detach().cpu().numpy()
+			scores = torch.nn.functional.softmax(logits_per_image / 0.1, dim=0)
+
+			# Convert scores to a list of floats
+			scores = scores.flatten().tolist()
 
 			# Convert similarity tensor to a list of floats
-			scores = scores.tolist()
+			# scores = scores.tolist()
 
 			return ClipSimilarityResult(scores=scores)
 		finally:
