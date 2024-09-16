@@ -67,7 +67,7 @@ async def read_item(payload: ClipInput, response: Response):
 @app.post("/similarity")
 async def similarity(payload: ClipSimilarityInput, response: Response):
 	try:
-		result = await clip.vectorize(payload)
+		result = await clip.similarity(payload)
 		return {
 			"scores": result.scores,
 		}

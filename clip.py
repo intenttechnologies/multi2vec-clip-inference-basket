@@ -6,7 +6,7 @@ from typing import Union
 from PIL import Image
 from pydantic import BaseModel
 from transformers import CLIPProcessor, CLIPModel
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer, util
 import open_clip
 import torch
 import json
@@ -48,6 +48,9 @@ class ClipInferenceABS(ABC):
 	def vectorize(self, payload: ClipInput) -> ClipResult:
 		...
 
+	@abstractmethod
+	def similarity(self, payload: ClipSimilarityInput) -> ClipSimilarityResult:
+		...
 
 class ClipInferenceSentenceTransformers(ClipInferenceABS):
 	img_model: SentenceTransformer
@@ -112,20 +115,27 @@ class ClipInferenceSentenceTransformers(ClipInferenceABS):
 		try:
 			self.lock.acquire()
 			image = _parse_image(payload.image)
+			text = payload.texts
 
-			image = Image.open(str(image))
-			texts = payload.texts
-			# text = [t.strip() for t in text.split("|")]
-			inputs = self.processor(
-				text=texts, images=image, return_tensors="pt", padding=True
-			).to(self.device)
+			# Convert the image to an embedding
+			image_embedding = self.img_model.encode(image, convert_to_tensor=True)
 
-			outputs = self.model(**inputs)
-			logits_per_image = outputs.logits_per_image
-			probs = logits_per_image.softmax(dim=1)
+			# Convert the text to an embedding
+			text_embedding = self.text_model.encode(text, convert_to_tensor=True)
 
-			result = ClipSimilarityResult(scores=probs.tolist()[0])
-			return result
+			# Compute cosine similarity
+			similarity = util.cos_sim(image_embedding, text_embedding)
+
+			# Without softmax the results are way too close together
+			# scores = similarity[0]		
+   
+			# Apply softmax to amplify differences
+			scores = torch.nn.functional.softmax(similarity[0] / 0.1, dim=0)
+
+			# Convert similarity tensor to a list of floats
+			scores = scores.tolist()
+
+			return ClipSimilarityResult(scores=scores)
 		finally:
 			self.lock.release()
 
@@ -317,6 +327,9 @@ class Clip:
 		"""
 
 		return await asyncio.wrap_future(self.executor.submit(self.clip.vectorize, payload))
+
+	async def similarity(self, payload: ClipSimilarityInput):
+		return await asyncio.wrap_future(self.executor.submit(self.clip.similarity, payload))
 
 
 # _parse_image decodes the base64 and parses the image bytes into a
